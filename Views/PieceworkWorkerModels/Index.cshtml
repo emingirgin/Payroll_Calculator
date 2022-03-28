@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Lab5_DB.Models.PieceworkWorkerModel>
+
+@{
+    ViewData["Title"] = "Index";
+    int totalWorkers = 0;
+    int totalMessages = 0;
+    double totalPay = 0.0;
+    double averagePay = 0.0;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSenior)
+            </th>
+            <th>
+                Salary
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    totalWorkers++;
+    totalMessages += Int32.Parse(item.Messages);
+    totalPay += item.Pay();
+    averagePay = totalPay / totalWorkers;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Messages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSenior)
+            </td>
+            <td>
+                @item.Pay().ToString("c")
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            Total Workers :@totalWorkers
+        </p>
+        <p>
+            Total Messages :@totalMessages
+        </p>
+        <p>
+            Total Pay :@totalPay.ToString("c")
+        </p>
+        <p>
+            Average Pay :@averagePay.ToString("c")
+        </p>
+    </div>
+</div>

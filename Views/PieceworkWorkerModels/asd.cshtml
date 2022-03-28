@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Lab5_DB.Models.PieceworkWorkerModel>
+
+@{
+    ViewData["Title"] = "Summary";
+    int totalWorkers = 0;
+    int totalMessages = 0;
+    double totalPay = 0.0;
+    double averagePay = 0.0;
+}
+
+<h1>Summary</h1>
+
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            Total Workers :@totalWorkers
+        </p>
+        <p>
+            Total Messages :@totalMessages
+        </p>
+        <p>
+            Total Pay :@totalPay.ToString("c")
+        </p>
+        <p>
+            Average Pay :@averagePay.ToString("c")
+        </p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
